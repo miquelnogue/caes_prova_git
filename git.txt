@@ -1,0 +1,130 @@
+#BLOC 1
+# Inicialitzar repositori
+git init .
+# Crear un fitxer A.txt
+touch A.txt
+# Afegir arxiu al repositori
+git add A.txt
+git commit -m "fitxer inicial"
+# Crear un fitxer B.txt
+touch B.txt
+# Afegir arxiu al repositori
+git add B.txt
+git commit -m "fitxer inicial"
+
+
+#BLOC 2
+#Afegir text "Canvi A1" a A.txt
+echo Canvi A1 >> A.txt
+#Afegir text "Canvi B1" a B.txt
+echo Canvi B1 >> B.txt
+#Afegir canvis pendents al repositori
+git add A.txt B.txt
+git commit -m "text modificat"
+
+#BLOC 3
+#Crear branca1
+git branch branca1
+#Fer branca1 la branca actual
+git checkout branca1
+#Crear fitxer C.txt
+touch C.txt
+#Afegir fitxer al repositori
+git add C.txt
+git commit -m "fitxer inicial"
+#Afegir text a C.txt
+echo canvi C1 branca 1 >> C.txt
+#Afegir canvis al repositori
+git add C.txt
+git commit -m "text modificat"
+
+#BLOC 4
+#Crear branca2
+git branch branca2
+#Fer branca2 la branca actual
+git checkout branca1
+#Crear fitxer D.txt
+touch D.txt
+#Afegir fitxer al repositori
+git add D.txt
+git commit -m "fitxer inicial"
+#Afegir text a D.txt
+echo canvi D1 branca 2 >> D.txt
+#Afegir canvis al repositori
+git add D.txt
+git commit -m "text modificat"
+
+#BLOC 5
+#Fer branca1 branca actual
+git checkout branca1
+#Fer merge de branca 2 a branca 1 i de branca 1 a master
+git merge branca2
+git checkout master
+git merge branca1
+
+#BLOC 6
+#Fer master la branca actual
+git checkout master
+#Crear nou fitxer E.txt
+touch E.txt
+#Afegir al repositori
+git add E.txt
+git commit -m "fitxer inicial"
+#Crear branca3 des de master
+git branch branca3
+#Fer branca3 la branca actual
+git checkout branca3
+#Afegir canvi E1 branca 3 a E.txt
+echo canvi E1 branca 3 >> E.txt
+#Afegir canvis al repositori
+git add E.txt
+git commit -m "text modificat"
+#Crear branca4 des de master
+git checkout master
+git branch branca4
+#Fer branca4 la branca actual
+git checkout branca4
+#Afegir canvis E1 branca4 a E.txt
+echo canvia E1 branca4 >> E.txt
+#Afegir canvis al repositori
+git add E.txt
+git commit -m "text modificat"
+#Fer merge de branques 3 i 4 cap a master (conflictes)
+git checkout master
+git merge branca3
+git merge branca4
+git checkout --ours E.txt
+git diff -c E.txt
+git add E.txt
+
+#BLOC7
+#Fer master la branca actual
+git checkout master
+#Afegir Canvi A2 a A.txt
+echo Canvi A2 >> A.txt
+#Afegir canvi al repositori
+git add A.txt
+git commit -m "text modificat"
+#Desfer ultim canvi al repositori
+git revert HEAD --no-edit
+
+#BLOC8
+#Fer master la branca actual
+git checkout master
+#Afegir Canvi A3 a A.txt
+echo Canvi A3 >> A.txt
+#Afegir canvi al repositori
+git add A.txt
+git commit -m "text modificat"
+#Afegir Canvi B2 a B.txt
+echo Canvi B2 >> B.txt
+#Afegir canvi al repositori
+git add B.txt
+git commit -m "text modificat"
+#Afegir Canvi C1 a C.txt
+echo Canvi C1 >> C.txt
+#Afegir canvi al repositori
+git add C.txt
+git commit -m "text modificat"
+#Desfer commit corresponent a Canvi B2
+git revert HEAD~1 --no-edit
